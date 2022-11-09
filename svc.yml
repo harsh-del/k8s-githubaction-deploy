@@ -11,3 +11,5 @@ spec:
   selector:
     app: web-1
   type: LoadBalancer
+  
+  
