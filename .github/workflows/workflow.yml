@@ -15,22 +15,22 @@ jobs:
     name: Setup and Deploy
     runs-on: ubuntu-latest
 
-  steps:
-   - name: Checkout
-     uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
  
-   - name: Setup gcloud
-     uses: google-github-actions/setup-gcloud@master
-     with:
-       service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-       project_id: ${{ env.PROJECT_ID }}
-       export_default_credentials: true
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ env.PROJECT_ID }}
+          export_default_credentials: true
 
-   - name: Getting gcloud credentials
-     run: |-
-       gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
+      - name: Getting gcloud credentials
+        run: |-
+          gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }} --project ${{ env.PROJECT_ID }}
 
-   - name: Deploying app
-     run: |-
-      kubectl create -f deploy.yml
-      kubectl create -f svc.yml
+      - name: Deploying app
+        run: |-
+          kubectl create -f deploy.yml
+          kubectl create -f svc.yml
